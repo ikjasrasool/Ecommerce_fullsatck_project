@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <link rel="stylesheet" th:href="@{../css/styles.css}">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 450px;
+            width: 100%;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #333;
+            font-size: 1.8rem;
+        }
+        .input-group {
+            margin-bottom: 1.2rem;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: bold;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease-in-out;
+        }
+        .input-group input:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            background-color: #dff0d8;
+            color: #3c763d;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 6px;
+            text-align: center;
+        }
+        p {
+            text-align: center;
+            margin-top: 1rem;
+            color: #777;
+        }
+        p a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+        p a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Sign-Up</h2>
+
+    <div th:if="${message != null}" class="message">
+        [[${message}]]
+    </div>
+
+    <form th:action="@{/registration}" method="post" role="form" th:object="${user}">
+        <div class="input-group">
+            <label for="name">Name:</label>
+            <input th:field="*{name}" type="text" id="name" name="name" placeholder="Enter your Name" required>
+        </div>
+        <div class="input-group">
+            <label for="email">Email:</label>
+            <input th:field="*{email}" type="email" id="email" name="email" placeholder="Enter your email"  required>
+        </div>
+        <div class="input-group">
+            <label for="role">Role:</label>
+            <input th:field="*{role}" type="text" id="role" name="role" placeholder="Enter your Role" required>
+        </div>
+        <div class="input-group">
+            <label for="pass">Password:</label>
+            <input th:field="*{password}" type="password" id="pass" name="pass" placeholder="Enter your Password" required>
+        </div>
+
+        <div class="input-group">
+            <label for="repass">Re-Password:</label>
+            <input th:field="*{rePassword}" type="password" id="repass" name="repass" placeholder="Re-enter your Password" required>
+        </div>
+        <button type="submit" class="btn">Register</button>
+    </form>
+    <p>Already have an account? <a th:href="@{/login}">Login</a></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Store</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f5f7fa;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+        }
+
+        #navbar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            padding: .5rem 5rem;
+            box-shadow: 5px 5px 20px rgba(0, 0, 0, .5);
+            background: #1a1a1a;
+        }
+
+        .navbar .navbar-brand {
+            font-size: 28px;
+            font-weight: bold;
+            color: #00d4ff !important;
+        }
+
+        #navbarSupportedContent a {
+            color: #fff;
+            border-bottom: 2px solid transparent;
+            margin-right: 20px;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+        }
+
+        #navbarSupportedContent a:hover {
+            color: #00d4ff;
+            border-bottom: 2px solid #00d4ff;
+        }
+
+        .navbar-toggler {
+            background-color: #00d4ff;
+            border-radius: 15px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: #333;
+            text-align: center;
+        }
+
+        .card {
+            background: #fff;
+            border: none !important;
+            border-radius: 20px !important;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: inset 5px 5px 10px rgba(0, 0, 0, .3),
+            inset -4px -4px 10px rgb(249, 234, 234);
+        }
+
+        .btn {
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-danger {
+            background-color: #ff4d4d;
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background-color: #ff1a1a;
+        }
+
+        .btn-primary {
+            background-color: #00d4ff;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border-radius: 50px;
+        }
+
+        .btn-primary:hover {
+            background-color: #008bb2;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        #stick {
+            position: sticky;
+            top: 10px;
+        }
+
+        #con {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .card img {
+            border-radius: 15px;
+            height: 200px;
+            object-fit: cover;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .card-body h4 {
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            #stick {
+                position: static;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark" id="navbar">
+    <a class="navbar-brand" href="#">Mini Store</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/home}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/about}">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/shop}">Product</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/cart}">My Cart</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/contact}">Contact</a>
+            </li>
+        </ul>
+    </div>
+    <div class="logout">
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-primary">Logout</button>
+        </form>
+    </div>
+</nav>
+
+<h1 class="text-center my-5">Your Shopping Cart</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="card" th:each="pro:${cart}">
+                <div class="row no-gutters">
+                    <div class="col-sm-5 d-flex justify-content-center" th:if="${pro != null}">
+                        <img height="200px" width="200px" th:src="@{'/images/' + ${pro.image}}" alt="Image">
+                    </div>
+                    <div class="col-sm-5 card-body">
+                        <h5 class="card-title" th:text="${pro.name}"></h5>
+                        <h4>Rs.<span th:text="${pro.price}"></span></h4>
+                        <h4><span th:text="${pro.weight}"></span></h4>
+                        <p th:text="${pro.description}"></p>
+                    </div>
+                    <div class="col-sm-2 center">
+                        <a th:href="@{/del/{id}(id=${pro.id})}" class="btn btn-danger">Remove</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3" id="stick">
+            <div class="card text-center" id="con">
+                <div class="card-header">
+                    Bill
+                </div>
+                <div class="card-body">
+                    <p>Total No. of Products: <span th:text="${count}"></span></p>
+                    <p>Total Amount: Rs.<span th:text="${total}"></span></p>
+                    <a th:href="@{/address}" class="btn btn-primary">Place Order</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
