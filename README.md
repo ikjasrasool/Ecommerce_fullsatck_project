@@ -1,6 +1,4 @@
 
-
-```markdown
 # 🛒 Ecommerce Full Stack Project
 
 This is a full-stack E-commerce web application built using **Java (Spring Boot)** for the backend and **HTML/CSS/JavaScript** for the frontend. It demonstrates the core functionalities of an online shopping platform, including product listing, user authentication, cart management, and order placement.
