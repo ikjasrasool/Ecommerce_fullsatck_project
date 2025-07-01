@@ -10,7 +10,7 @@ This is a full-stack E-commerce web application built using **Java (Spring Boot)
 ### 🖥️ Frontend
 - HTML
 - CSS
-- JavaScript (Vanilla)
+- JavaScript
 
 ### ⚙️ Backend
 - Java
@@ -20,7 +20,7 @@ This is a full-stack E-commerce web application built using **Java (Spring Boot)
 - Hibernate
 
 ### 🗄️ Database
-- MySQL / H2 (for development)
+- MySQL
 
 ### 📦 Build Tool
 - Maven
@@ -64,10 +64,10 @@ Ecommerce\_fullstack\_project/
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Java 17+
+- Java 21
 - Maven
-- MySQL / H2
-- IDE like IntelliJ IDEA or Eclipse
+- MySQL
+- IDE like IntelliJ IDEA 
 
 ### Steps to Run
 
